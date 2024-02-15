@@ -1,14 +1,13 @@
 {
-	"singleQuote": true,
-	"trailingComma": "all",
-	"useTabs": true,
-	"semi": true,
-	"bracketSpacing": true,
-	"rules": {
-		"simple-import-sort/imports": "error",
-		"simple-import-sort/exports": "error",
-		"import/first": "error",
-		"import/newline-after-import": "error",
-		"import/no-duplicates": "error"
-	}
+  "trailingComma": "all",
+  "useTabs": false,
+  "semi": false,
+  "singleQuote": true,
+  "rules": {
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error"
+  }
 }

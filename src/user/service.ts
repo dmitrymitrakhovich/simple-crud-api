@@ -1,44 +1,44 @@
-import { HttpException } from '../exceptions/http-exception';
-import { HttpStatus, IUserWithoutId } from '../types';
-import { User } from './model';
-import { Repository } from './repository';
+import { HttpException } from '../exceptions/http-exception'
+import { HttpStatus, IUserWithoutId } from '../types'
+import { User } from './model'
+import { Repository } from './repository'
 
 export class Service {
-	private repository: Repository = new Repository();
-	public getAll() {
-		return this.repository.getAll();
-	}
+  private repository: Repository = new Repository()
+  public getAll() {
+    return this.repository.getAll()
+  }
 
-	public getOne(id: string) {
-		const user = this.repository.getOne(id);
+  public getOne(id: string) {
+    const user = this.repository.getOne(id)
 
-		if (!user) {
-			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-		}
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
 
-		return user;
-	}
+    return user
+  }
 
-	public create(body: IUserWithoutId) {
-		const newUser = new User(body.username, body.age, body.hobbies);
-		this.repository.create(newUser);
+  public create(body: IUserWithoutId) {
+    const newUser = new User(body.username, body.age, body.hobbies)
+    this.repository.create(newUser)
 
-		return newUser;
-	}
+    return newUser
+  }
 
-	public update(id: string, body: IUserWithoutId) {
-		const user = this.repository.getOne(id);
+  public update(id: string, body: IUserWithoutId) {
+    const user = this.repository.getOne(id)
 
-		if (!user) {
-			throw new HttpException('User not found', HttpStatus.NOT_FOUND);
-		}
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
+    }
 
-		const updatedUser = this.repository.update({ ...body, id });
+    const updatedUser = this.repository.update({ ...body, id })
 
-		return updatedUser;
-	}
+    return updatedUser
+  }
 
-	public delete(id: string) {
-		this.repository.delete(id);
-	}
+  public delete(id: string) {
+    this.repository.delete(id)
+  }
 }
