@@ -1,5 +1,9 @@
 import 'dotenv/config';
 
-const PORT = process.env.PORT || 3000;
+import { Application } from './src/application';
 
-console.log('Hello, World!');
+const PORT = Number(process.env.PORT) || 4000;
+
+const app = new Application();
+
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
