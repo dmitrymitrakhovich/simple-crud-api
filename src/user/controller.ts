@@ -107,6 +107,11 @@ export class Controller {
       const userId = req.url?.split('/')[3] || ''
       validateId(userId)
       this.service.delete(userId)
+
+      res.writeHead(HttpStatus.NO_CONTENT, {
+        'Content-Type': 'application/json',
+      })
+      res.end(JSON.stringify({ message: 'User deleted' }))
     } catch (error) {
       if (error instanceof HttpException) {
         res.writeHead(error.status, {

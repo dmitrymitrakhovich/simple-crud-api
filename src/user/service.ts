@@ -27,11 +27,7 @@ export class Service {
   }
 
   public update(id: string, body: IUserWithoutId) {
-    const user = this.repository.getOne(id)
-
-    if (!user) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND)
-    }
+    this.getOne(id)
 
     const updatedUser = this.repository.update({ ...body, id })
 
@@ -39,6 +35,7 @@ export class Service {
   }
 
   public delete(id: string) {
+    this.getOne(id)
     this.repository.delete(id)
   }
 }
