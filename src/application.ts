@@ -5,7 +5,7 @@ import { HttpStatus } from './types'
 import { Router } from './user/router'
 
 export class Application {
-  private server: Server = this.createServer()
+  public server: Server = this.createServer()
   private router: Router = new Router()
 
   private createServer() {
@@ -21,7 +21,7 @@ export class Application {
     }
   }
 
-  public listen(port: number, cb: () => void) {
+  public listen(port: number, cb?: () => void) {
     this.server.listen(port, cb)
   }
 }
