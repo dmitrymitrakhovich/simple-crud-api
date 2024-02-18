@@ -2,8 +2,8 @@ import { IncomingMessage, ServerResponse } from 'node:http'
 
 import { HttpException } from '../exceptions/http-exception'
 import { HttpStatus, IUserWithoutId } from '../types'
-import { Service } from './service'
-import { validateId, validateUser } from './validation'
+import { Service } from './user.service'
+import { validateId, validateUser } from './user.validation'
 
 export class Controller {
   service: Service = new Service()

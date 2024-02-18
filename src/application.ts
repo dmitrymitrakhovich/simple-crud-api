@@ -2,7 +2,7 @@ import http, { IncomingMessage, Server, ServerResponse } from 'http'
 
 import { HttpException } from './exceptions/http-exception'
 import { HttpStatus } from './types'
-import { Router } from './user/router'
+import { Router } from './user/user.router'
 
 export class Application {
   public server: Server = this.createServer()

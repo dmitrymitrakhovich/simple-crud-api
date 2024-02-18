@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'node:http'
 
 import { HttpStatus } from '../types'
-import { Controller } from './controller'
+import { Controller } from './user.controller'
 
 export class Router {
   private controller: Controller = new Controller()

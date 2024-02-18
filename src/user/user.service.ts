@@ -1,7 +1,7 @@
 import { HttpException } from '../exceptions/http-exception'
 import { HttpStatus, IUserWithoutId } from '../types'
-import { User } from './model'
-import { Repository } from './repository'
+import { User } from './user.model'
+import { Repository } from './user.repository'
 
 export class Service {
   private repository: Repository = new Repository()
