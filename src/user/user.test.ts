@@ -29,13 +29,15 @@ describe('/api/users', () => {
 
   test('should create a new user', async () => {
     const response = await request(server).post('/api/users').send(user)
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
+    userUUID = response.body.id
+
     expect(response.status).toBe(201)
     expect(response.body).toEqual({
-      id: expect.any(String),
+      id: userUUID,
       ...user,
     })
-
-    userUUID = response.body.id
   })
 
   test('should return an error if missing required field during creating', async () => {
@@ -46,7 +48,7 @@ describe('/api/users', () => {
         hobbies: ['Node.js', 'React'],
       })
     expect(response.status).toBe(400)
-    expect(response.body.message).toBe('Missing required field')
+    expect(response.body).toEqual({ message: 'Missing required field' })
   })
 
   it('should return an error if hobbies  is not an array of string', async () => {
@@ -54,13 +56,13 @@ describe('/api/users', () => {
       .post('/api/users')
       .send({ ...user, hobbies: [1234, true, 'Node.js'] })
     expect(response.status).toBe(400)
-    expect(response.body.message).toBe('Invalid type for fields')
+    expect(response.body).toEqual({ message: 'Invalid type for fields' })
   })
 
   test('should return array of users', async () => {
     const response = await request(server).get('/api/users')
     expect(response.status).toBe(200)
-    expect(response.body).toEqual([{ id: expect.any(String), ...user }])
+    expect(response.body).toEqual([{ id: userUUID, ...user }])
   })
 
   test('should return a single user', async () => {
@@ -72,13 +74,13 @@ describe('/api/users', () => {
   test('should return an error if user not found during getting', async () => {
     const response = await request(server).get(`/api/users/${fakeUUID}`)
     expect(response.status).toBe(404)
-    expect(response.body.message).toBe('User not found')
+    expect(response.body).toEqual({ message: 'User not found' })
   })
 
   test('should return an error if invalid id during creating', async () => {
     const response = await request(server).get('/api/users/1234')
     expect(response.status).toBe(400)
-    expect(response.body.message).toBe('Not valid UUID')
+    expect(response.body).toEqual({ message: 'Not valid UUID' })
   })
 
   test('should update a user', async () => {
@@ -97,7 +99,7 @@ describe('/api/users', () => {
       .put('/api/users/1234')
       .send(updatedUser)
     expect(response.status).toBe(400)
-    expect(response.body.message).toBe('Not valid UUID')
+    expect(response.body).toEqual({ message: 'Not valid UUID' })
   })
 
   test('should return an error if user not found during updating', async () => {
@@ -105,7 +107,7 @@ describe('/api/users', () => {
       .put(`/api/users/${fakeUUID}`)
       .send(updatedUser)
     expect(response.status).toBe(404)
-    expect(response.body.message).toBe('User not found')
+    expect(response.body).toEqual({ message: 'User not found' })
   })
 
   test('should return an error if missing required field during updating', async () => {
@@ -116,13 +118,13 @@ describe('/api/users', () => {
         hobbies: ['Node.js', 'React'],
       })
     expect(response.status).toBe(400)
-    expect(response.body.message).toBe('Missing required field')
+    expect(response.body).toEqual({ message: 'Missing required field' })
   })
 
   test('should return an error if user not found during updating', async () => {
     const response = await request(server).delete(`/api/users/${fakeUUID}`)
     expect(response.status).toBe(404)
-    expect(response.body.message).toBe('User not found')
+    expect(response.body).toEqual({ message: 'User not found' })
   })
 
   test('should delete a user', async () => {
@@ -132,9 +134,9 @@ describe('/api/users', () => {
     expect(users.body).toEqual([])
   })
 
-  test('should return an error if route not found', async () => { 
+  test('should return an error if route not found', async () => {
     const response = await request(server).get('/api/posts')
     expect(response.status).toBe(404)
-    expect(response.body.message).toBe('Not found')
+    expect(response.body).toEqual({ message: 'Not found' })
   })
 })

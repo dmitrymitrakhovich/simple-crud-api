@@ -63,3 +63,9 @@ To automatically fix linting issues, you can run:
 ```bash
 npm run lint:fix
 ```
+
+To run tests, you can run:
+
+```bash
+npm run test
+```
